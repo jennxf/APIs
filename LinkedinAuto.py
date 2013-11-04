@@ -1,3 +1,4 @@
+import MySQLdb as mdb
 import requests
 import json
 from pprint import pprint
@@ -17,8 +18,11 @@ r = requests.get("https://api.linkedin.com/v1/companies/1666:(id,num-followers)"
 data = json.loads(r.text)
 
 #pprint(data)
-print strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ": " + str(data["numFollowers"])
-
+#numfollowers=strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ": " + str(data["numFollowers"])
+numfollowers=str(data["numFollowers"])
+Timestamp=strftime("%Y-%m-%d %H:%M:%S", gmtime())
+print numfollowers
+print Timestamp
 # print "FROM HERE IS JENN"
 
 # print data["_count"]
@@ -30,3 +34,14 @@ print strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ": " + str(data["numFollowers"])
 # print data["values"][3]
 # print "\n"
 # print data["values"][4]
+
+con = mdb.connect('intuittest.cq2mgcdwryfy.us-west-1.rds.amazonaws.com', 'root', 'password', 'jenndb');
+with con:
+	cur = con.cursor()
+	#cur.execute("INSERT INTO flash(Total_IOP_Signups, Total_IOP_Billed) VALUES('" + str(a[i]) + "', '" + str(b[i]) + "')" )
+	#cur.execute("INSERT INTO API(LinkedINGroups_Num_Followers, Timestamp) VALUES('" + numfollowers + "', '" + Timestamp + "')" )
+	sql = "INSERT INTO API(LinkedINGroups_Num_Followers, Timestamp) VALUES('" + numfollowers + "', '" + Timestamp + "')"
+	print sql
+	cur.execute(sql)
+
+print "Done"
