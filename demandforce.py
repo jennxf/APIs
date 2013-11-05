@@ -37,6 +37,8 @@ for item in period:
  	year = item['date']['year']
  	dt = datetime.datetime(year=year, month=month, day=1)
  	print dt
+
+ 	
  	# insert mysql here
 	
 #Timestamp=strftime("%Y-%m-%d %H:%M:%S", gmtime())
