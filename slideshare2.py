@@ -51,8 +51,7 @@ for item in slideshow_id:
 	# con = mdb.connect('intuittest.cq2mgcdwryfy.us-west-1.rds.amazonaws.com', 'root', 'password', 'jenndb');
 	with con:
 		cur = con.cursor()
-		cur.execute("INSERT INTO slideshare_quickbase(Timestamp,Presentation, Views, Downloads, Favorites, Comments) VALUES('" + Timestamp+ "','"
-																													  + str(y.slideshow.created.text)+ "', '"	
+		cur.execute("INSERT INTO slideshare_quickbase(Timestamp,Presentation, Views, Downloads, Favorites, Comments) VALUES('" + Timestamp+ "','"	
 																													  + str(y.slideshow.strippedtitle.text)+ "', '"
 																												      + str(y.slideshow.numviews.text) + "', '"
 																												      + str(y.slideshow.numdownloads.text) + "', '" 
