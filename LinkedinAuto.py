@@ -40,7 +40,7 @@ with con:
 	cur = con.cursor()
 	#cur.execute("INSERT INTO flash(Total_IOP_Signups, Total_IOP_Billed) VALUES('" + str(a[i]) + "', '" + str(b[i]) + "')" )
 	#cur.execute("INSERT INTO API(LinkedINGroups_Num_Followers, Timestamp) VALUES('" + numfollowers + "', '" + Timestamp + "')" )
-																	#VALUES('numfollowers', 'Timestamp')				
+			#The first part of the string is from the <Insert statement to Values('> + <numfollowers is not a string> + <string 2: ','> + <Timestamp> + <string3: ')>																			
 	sql = "INSERT INTO API(LinkedINGroups_Num_Followers, Timestamp) VALUES('" + numfollowers + "', '" + Timestamp + "')"
 	print sql
 	cur.execute(sql)
