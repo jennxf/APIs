@@ -51,12 +51,18 @@ for item in slideshow_id:
 	con = mdb.connect('intuittest.cq2mgcdwryfy.us-west-1.rds.amazonaws.com', 'root', 'password', 'jenndb');
 	with con:
 		cur = con.cursor()
-		cur.execute("INSERT INTO slideshare_quickbase(Timestamp,Presentation, Views, Downloads, Favorites, Comments) VALUES('" + Timestamp+ "','"	
+		cur.execute("INSERT INTO Slideshare(Timestamp,Presentation, Views, Downloads, Favorites, Comments) VALUES('" + Timestamp+ "','"	
 																													  + str(y.slideshow.strippedtitle.text)+ "', '"
 																												      + str(y.slideshow.numviews.text) + "', '"
 																												      + str(y.slideshow.numdownloads.text) + "', '" 
 																												      + str(y.slideshow.numfavorites.text) + "', '" 
 																												      + str(y.slideshow.numcomments.text) + "')")
+		# cur.execute("INSERT INTO slideshare_quickbase(Timestamp,Presentation, Views, Downloads, Favorites, Comments) VALUES('" + Timestamp+ "','"	
+		# 																											  + str(y.slideshow.strippedtitle.text)+ "', '"
+		# 																										      + str(y.slideshow.numviews.text) + "', '"
+		# 																										      + str(y.slideshow.numdownloads.text) + "', '" 
+		# 																										      + str(y.slideshow.numfavorites.text) + "', '" 
+		# 																										      + str(y.slideshow.numcomments.text) + "')")
 		#the small quotation marks is just a string. The variables have on quotation marks on them. everything in the big quotation marks are string. 
 		#The first part of the string is from the <Insert statement to Values('> + <numfollowers is not a string> + <string 2: ','> + <Timestamp> + <string3: ')>
 		#print itemlist[0].attributes['NumDownloads'].value
