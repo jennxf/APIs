@@ -46,7 +46,7 @@ for item in slideshow_id:
 	print "Comments = "+ str(y.slideshow.numcomments.text)
 	print "Shares = "+ str(y.slideshow.sharewithcontacts.text)
 
-	intuittest.cq2mgcdwryfy.us-west-1.rds.amazonaws.com
+	# intuittest.cq2mgcdwryfy.us-west-1.rds.amazonaws.com
 	con = mdb.connect('localhost', 'root', 'root', 'jenndb', 8889, '/Applications/MAMP/tmp/mysql/mysql.sock');
 	# con = mdb.connect('intuittest.cq2mgcdwryfy.us-west-1.rds.amazonaws.com', 'root', 'password', 'jenndb');
 	with con:
