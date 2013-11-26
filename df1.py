@@ -12,7 +12,7 @@ payload={
 		 'oauth2_access_token':'AQXqWy92Jtz6qa-qE5DazfVCNBHOI_4uy9abBqUuyagITGt1xFBTQg3BHkpUsXdO2s-3zmAXVj1XjuBzAEm-3Nudyyw-R9n4g8vOOza5evu_CMBzczb__-P3OGCDU2EpjHXkT4fClkiTle__UBEH5oL6FVfoG-pW2cpC81M_FNImZtNWCqs',		 
 		 }
 
-r = requests.get("https://api.linkedin.com/v1/companies/89760/company-statistics:(follow-statistics:(countsByMonth))", params=payload)
+r = requests.get("https://api.linkedin.com/v1/companies/89760/company-statistics:(follow-statistics:(countsByMonth:(totalCount)))", params=payload)
 
 #print r.text
 
@@ -21,22 +21,22 @@ data = json.loads(r.text)
 # pprint(data)
 #numfollowers=strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ": " + str(data["numFollowers"])
 #month=str(data["followStatistics"]["countsByMonth"]["values"]["date"]["month"])
-# followers=data["followStatistics"]["countsByMonth"]["values"]
-period=data["followStatistics"]["countsByMonth"]["values"]
+followers=data["followStatistics"]["countsByMonth"]["values"]
+#period=data["followStatistics"]["countsByMonth"]["values"]
 # print followers
-
-# for item in followers:
-# 	print item['totalCount']
+i=0
+for item in followers:
+	print item['totalCount']
 # for item in period:
 #  	print item['date']['month']
 # for item in period:
 #  	print item['date']['year']
-for item in period:
-	followers = item['totalCount']
- 	month = item['date']['month']
- 	year = item['date']['year']
- 	dt = datetime.datetime(year=year, month=month, day=30)
- 	print dt
+# for item in period:
+# 	followers = item['totalCount']
+#  	month = item['date']['month']
+#  	year = item['date']['year']
+#  	dt = datetime.datetime(year=year, month=month, day=30)
+#  	print dt
 
 
  	# insert mysql here
@@ -49,7 +49,7 @@ for item in period:
 # print newfollowers
 # print Totfollowers
 # print Timestamp
-# print "FROM HERE IS JENN"
+
 
 # print data["_count"]
 
@@ -63,12 +63,15 @@ for item in period:
 	con = mdb.connect('intuittest.cq2mgcdwryfy.us-west-1.rds.amazonaws.com', 'root', 'password', 'jenndb');
 	with con:
  		cur = con.cursor()
-# 	#cur.execute("INSERT INTO flash(Total_IOP_Signups, Total_IOP_Billed) VALUES('" + str(a[i]) + "', '" + str(b[i]) + "')" )
- 	#cur.execute("INSERT INTO DemandForce(Num_Followers, Timestamp) VALUES('" + followers + "', '" + dt + "')" )
- 		cur.execute("INSERT INTO DemandForce(Num_Followers, Timestamp) VALUES('" + str(followers) + "', '" + str(dt) +"')")
+# # 	#cur.execute("INSERT INTO flash(Total_IOP_Signups, Total_IOP_Billed) VALUES('" + str(a[i]) + "', '" + str(b[i]) + "')" )
+  		# cur.execute("INSERT INTO DemandForce(Num_Followers, Timestamp) VALUES('" + followers + "', '" + dt + "')" )
+ 		cur.execute("UPDATE DemandForce SET Num_Followers=%s WHERE id =%s", (item['totalCount'], i+1))
+ 		print "inserted " + str(item['totalCount']) +" for id = " + str(i+1)
+ 		i+=1
 
-# 	sql = "INSERT INTO API(LinkedINGroups_Num_Followers, Timestamp) VALUES('" + numfollowers + "', '" + Timestamp + "')"
-# 	print sql
-# 	cur.execute(sql)
 
-print "Done"
+# # 	sql = "INSERT INTO API(LinkedINGroups_Num_Followers, Timestamp) VALUES('" + numfollowers + "', '" + Timestamp + "')"
+# # 	print sql
+# # 	cur.execute(sql)
+
+print " Okay Done inserting into SQL Table"

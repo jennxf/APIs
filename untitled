@@ -1,0 +1,32 @@
+from time import gmtime, strftime
+import datetime
+import requests
+import json
+import hashlib
+import calendar
+
+Api_Key= "6N2eThpp"
+Api_Secret= "vYEMPVao"
+slideshow_id= '27501589'
+ts = str(calendar.timegm(time.gmtime()))
+username='intuitquickbase'
+password='machoman33'
+
+def getSignature(ts):
+	return hashlib.sha1(str(Api_Secret)+str(ts)).hexdigest()
+
+
+payload={ 'username'= username
+			'password'=password
+		 'api_key':Api_Key
+		 'format':'json',		 
+		 'ts':ts,
+		 'hash':getSignature(ts),	
+		 'slideshow_id':slideshow_id,
+
+		 }
+
+
+r = requests.get("https://www.slideshare.net/api/2/get_slideshow", params=payload)
+
+data = json.loads(r.text)

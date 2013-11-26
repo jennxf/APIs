@@ -40,6 +40,7 @@ with con:
 	cur = con.cursor()
 	#cur.execute("INSERT INTO flash(Total_IOP_Signups, Total_IOP_Billed) VALUES('" + str(a[i]) + "', '" + str(b[i]) + "')" )
 	#cur.execute("INSERT INTO API(LinkedINGroups_Num_Followers, Timestamp) VALUES('" + numfollowers + "', '" + Timestamp + "')" )
+																	#VALUES('numfollowers', 'Timestamp')				
 	sql = "INSERT INTO API(LinkedINGroups_Num_Followers, Timestamp) VALUES('" + numfollowers + "', '" + Timestamp + "')"
 	print sql
 	cur.execute(sql)
