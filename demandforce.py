@@ -31,44 +31,36 @@ period=data["followStatistics"]["countsByMonth"]["values"]
 #  	print item['date']['month']
 # for item in period:
 #  	print item['date']['year']
+followers_list=[]
+dt_list=[]
 for item in period:
 	followers = item['totalCount']
+	followers_list.append(followers)
  	month = item['date']['month']
  	year = item['date']['year']
- 	dt = datetime.datetime(year=year, month=month, day=30)
+ 	dt = datetime.datetime(year=year, month=month, day=1)
+ 	dt_list.append(dt)
  	print dt
+ 	print followers
+print "now printing the followers_list..."
+print""
+print followers_list
+print dt_list	
+print ""
+print "Ok, we have successfully generated the followers_list!"
+
+print "Now printing only the first item..."
+print str(followers_list[0])
+print str(dt_list[0])
 
 
- 	# insert mysql here
-	
-#Timestamp=strftime("%Y-%m-%d %H:%M:%S", gmtime())
-# dt = datetime.datetime(year=2012, month=2, day=1)
-# print dt
-# print month
-# print year
-# print newfollowers
-# print Totfollowers
-# print Timestamp
-# print "FROM HERE IS JENN"
+# con = mdb.connect('localhost', 'root', 'root', 'jenndb', 8889, '/Applications/MAMP/tmp/mysql/mysql.sock');
+con = mdb.connect('intuittest.cq2mgcdwryfy.us-west-1.rds.amazonaws.com', 'root', 'password', 'jenndb');
+with con:
+ 	cur = con.cursor()
+ 	cur.execute("INSERT INTO Linkedin_DemandForce(Num_Followers, Timestamp) VALUES('" + str(followers_list[0]) + "', '" + str(dt_list[0]) +"')")
 
-# print data["_count"]
+sql = "INSERT INTO DemandForce(Num_Followers, Timestamp) VALUES('" + str(followers_list[0]) + "', '" + str(dt_list[0]) + "')"
+print sql
 
-# print data["values"][0]
-# print "\n"
-# print data["values"][1]
-# print "\n"
-# print data["values"][3]
-# print "\n"
-# print data["values"][4]
-	con = mdb.connect('intuittest.cq2mgcdwryfy.us-west-1.rds.amazonaws.com', 'root', 'password', 'jenndb');
-	with con:
- 		cur = con.cursor()
-# 	#cur.execute("INSERT INTO flash(Total_IOP_Signups, Total_IOP_Billed) VALUES('" + str(a[i]) + "', '" + str(b[i]) + "')" )
- 	#cur.execute("INSERT INTO DemandForce(Num_Followers, Timestamp) VALUES('" + followers + "', '" + dt + "')" )
- 		cur.execute("INSERT INTO DemandForce(Num_Followers, Timestamp) VALUES('" + str(followers) + "', '" + str(dt) +"')")
-
-# 	sql = "INSERT INTO API(LinkedINGroups_Num_Followers, Timestamp) VALUES('" + numfollowers + "', '" + Timestamp + "')"
-# 	print sql
-# 	cur.execute(sql)
-
-print "Done"
+print "New Month Inserted!"
